@@ -1,6 +1,6 @@
-1. Create a new repo in github called “openmrs-esm-[name]-ext”, e.g. openmrs-esm-foo-ext
+1. Create a new repo in github called “openmrs-esm-foo-ext”. You can use a different name if you choose but remember to use this name in all places I reference openmrs-esm-foo-ext
 
-2. Create a directory called openmrs-esm and cd into it. Clone the above repo here.
+2. Create a directory called openmrs-esm and cd into it (this will/can be the base directory of your openmrs-esm development. Clone the above repo here.
 
 3. Clone https://github.com/openmrs/openmrs-esm-login.git to openmrs-esm directory as well. We are going to use this as a “template” for creating a new extension widget
 
@@ -13,7 +13,11 @@
 
 7. In your terminal, install the npm modules: 
 ``` npm install ```
-- make sure you are using a relatively recent version of node, LTE is 14.x.x, you can type node -version to find your current version.
-- I would recommend using n to manage your node version: see https://www.npmjs.com/package/n
+- make sure you are using a relatively recent version of node, LTE is 14.x.x, you can type node -version to find your current version. I would recommend using n to manage your node version: see https://www.npmjs.com/package/n
+- make sure you have a .gitignore file which includes node_modules
 
-8. 
+8. Run ```npm update``` to get updates
+
+9. Rename the file openmrs-esm-login.tsx to openmrs-esm-
+
+
