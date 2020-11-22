@@ -1,3 +1,11 @@
+
+## Required software for local development:
+- NodeJS and NPM : https://nodejs.org/en/
+- n (node version manager) : ```npm install -g n``` see https://www.npmjs.com/package/n
+- Visual Code Studio : https://code.visualstudio.com/
+
+
+## Development steps
 1. Create a new repo in github called “openmrs-esm-foo-ext”. You can use a different name if you choose but remember to use this name in all places I reference openmrs-esm-foo-ext
 
 2. Create a directory called openmrs-esm and cd into it (this will/can be the base directory of your openmrs-esm development. Clone the above repo here.
