@@ -30,8 +30,10 @@
 
 10. Update set-public-path.ts:
 replace ```setPublicPath("@openmrs/esm-login-app");``` with ```setPublicPath("@openmrs/esm-foo-ext");```
+See https://github.com/jonathandick/openmrs-esm-foo-ext/blob/master/src/set-public-path.ts
 
-10. We are now going to build a very simple React conmponent that will be the extension we add to the patient-chart. To start, delete the file root.component.tsx. Then create a new file with the same name (root.component.tsx). 
+
+10. We are now going to build a very simple React component that will be the extension we add to the patient-chart. To start, delete the file root.component.tsx. Then create a new file with the same name (root.component.tsx). 
 
 11. Copy the following into that file:
 ```
@@ -51,11 +53,26 @@ export default openmrsRootDecorator({
 })(Root);
 
 ```
+See https://github.com/jonathandick/openmrs-esm-foo-ext/blob/master/src/root.component.tsx
+
 
 12. Update the index.ts file. 
 Delete line 3: ```import * as LocationPickerParcel from "./location-picker-parcel.component";```
 Delete ```LocationPickerParcel``` from the ```export``` on/near line 23 
-
+Now replace the existing ```setupOpenMRS()``` function with the following:
+```
+function setupOpenMRS() {
+  return {
+    extensions: [
+      {
+        name: "foo-ext",
+        load: () => import("./openmrs-esm-foo-ext"),
+      }
+    ],
+  };
+}
+```
+See https://github.com/jonathandick/openmrs-esm-foo-ext/blob/master/src/index.ts
 
 13. Remove the following directories from your src directory: choose-location, loading, location-picker, login
 
@@ -73,12 +90,43 @@ Copy the following to this file:
   ]
 }
 ```
+See https://github.com/jonathandick/openmrs-esm-foo-ext/blob/master/babel.config.json
+
 
 15. Update the package.json file : Search for "login" and replace with "foo-ext" in all places. 
+See https://github.com/jonathandick/openmrs-esm-foo-ext/blob/master/package.json
 
-16. From the terminal, run ```npm run start``` . This will package and locally serve this es6 module. We will next incoporate it into the patient chart.
+16. From the terminal, run ```npm run start -- --importmap="https://spa-modules.nyc3.digitaloceanspaces.com/import-map.json"``` . This will build the package and locally serve it. The default is to use the openmrs instance running on the demo server at openmrs-spa.org. We're going to specifically tell it to use the latest import-map. Also note, that if you're feeling bold you can test this against your own version of openmrs by adding a ```--backend="url-to-your-backend"```
 
+17. Congratulations, you now have a local development environment set up with your first extension 
 
+18. To see and manage the import-map, enter your browser console and type ```localStorage.setItem("openmrs:devtools",true)```. You should see a small gray square now in the bottom right corner. This allows you to manage your import map. More to follow on how to use this tool.
+
+19. If you logged in as admin (which is a System Develope role in OpenMRS), you will have access to the implmenter tools via a small lavendar colored square in the right corner. This gives you access to the configurations for a distribution.
+
+20. Make sure you are now at /openmrs/spa/home. You should see a panel of buttons. Open up the implementer tools and look for the configuration for ```@openmrs/esm-home-app```. You should see this:
+```
+@openmrs/esm-home-app:
+extensions:
+   home-page-buttons:
+      add: []
+      remove: []
+      order: []
+```
+
+21. Click on the array next to add which will reveal a text input. Type into the input ```{"extension":"foo-ext"}```. Such that the json now should look like this:
+```
+@openmrs/esm-home-app:
+extensions:
+   home-page-buttons:
+      add: [{"extension":"foo-ext"}]
+      remove: []
+      order: []
+```
+This will automatically cause the foo-ext extension to load and you've now successfully created a new distribution of OpenMRS>
+
+## Building and deploying a distribution
+(forthcoming)
 
 ## Key files 
 - root level 
