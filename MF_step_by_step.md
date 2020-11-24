@@ -74,7 +74,9 @@ Copy the following to this file:
 }
 ```
 
-14. From the terminal, run ```npm run debug``` . This will package and locally serve this es6 module. We will next incoporate it into the patient chart.
+15. Update the package.json file : Search for "login" and replace with "foo-ext" in all places. 
+
+16. From the terminal, run ```npm run start``` . This will package and locally serve this es6 module. We will next incoporate it into the patient chart.
 
 
 
