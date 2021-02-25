@@ -18,10 +18,9 @@ export function ConfigTree({ config }: ConfigTreeProps) {
             .sort()
             .map((moduleName) => {
               const moduleConfig = config[moduleName];
-              return Object.keys(moduleConfig).length ? (
+              return (
                 <AccordionItem
-                  open
-                  title={<h4 className={styles.moduleName}>{moduleName}</h4>}
+                  title={<h6 className={styles.moduleName}>{moduleName}</h6>}
                   className={styles.fullWidthAccordion}
                   key={`accordion-${moduleName}`}
                 >
@@ -32,7 +31,7 @@ export function ConfigTree({ config }: ConfigTreeProps) {
                     />
                   </div>
                 </AccordionItem>
-              ) : null;
+              );
             })}
       </Accordion>
     </div>
